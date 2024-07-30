@@ -13,43 +13,6 @@ Welcome to **Web BotzAku** – an innovative project by Riski Yanda.
 - **Twitter:** [@iky_ynd](https://x.com/iky_ynd)
 - **Telegram:** [@iky_kiezie](https://t.me/iky_kiezie)
 
-## About
-
-Web BotzAku is a cutting-edge web application designed to...
-
-## Features
-
-- Feature 1
-- Feature 2
-- Feature 3
-
-## Installation
-
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/yourusername/web-botzaku.git
-    ```
-2. Navigate to the project directory:
-    ```sh
-    cd web-botzaku
-    ```
-3. Install dependencies:
-    ```sh
-    npm install
-    ```
-4. Start the application:
-    ```sh
-    npm start
-    ```
-
-## Usage
-
-Describe how to use your project...
-
-## Contributing
-
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) first.
-
 ## License
 
 This project is licensed under the MIT License.
