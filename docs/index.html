@@ -1,439 +1,197 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
-    <head>
-    	<!-- meta charec set -->
-        <meta charset="utf-8">
-		<!-- Always force latest IE rendering engine or request Chrome Frame -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<!-- Page Title -->
-        <title>BotzAku</title>		
-		<!-- Meta Description -->
-        <meta name="description" content="BotzAku">
-        <meta name="keywords" content="BotzAku, BotzAku Api, Api BotzAku, Apikey, RestApi BotzAku">
-        <meta name="author" content="Riski Yanda">
-		<!-- Mobile Specific Meta -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<!-- Google Font -->
-		
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotzAku</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .code-box {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            color: #dcdcdc;
+            position: relative;
+            display: none; 
+        }
+        .code-box::before {
+            content: 'Code:';
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ff9800;
+        }
+        .code-box button, .toggle-code, .language-selector button {
+            background-color: #333;
+            color: #ff9800;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .code-box button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .toggle-code[disabled] {
+           pointer-events: none;
+           opacity: 0;
+        }  
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+        .language-selector {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            min-width: 100%;
+        }
+        .language-dropdown button {
+            color: #ff9800;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+        .language-selector:hover .language-dropdown {
+            display: block;
+        }
+        h4 {
+        margin-bottom: 0; 
+        }
+        p {
+        margin-top: 0; 
+        }
+        h1 {
+        margin-bottom: 0; 
+        }
+        h3 {
+        margin-top: 0; 
+        }
+    </style>
+    <script>
+        function switchLanguage(language) {
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(element => {
+                if (element.dataset.lang === language) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+        }
+        function toggleCodeBox(paragraphId) {
+            const codeBox = document.querySelector(`#${paragraphId} .code-box`);
+            if (codeBox.style.display === 'none') {
+                codeBox.style.display = 'block';
+            } else {
+                codeBox.style.display = 'none';
+            }
+        }
+        function copyCode(button) {
+            const code = button.closest('.code-box').querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => {
+                    button.innerText = 'Copy';
+                }, 2000);
+            });
+        }
 
-		<!-- CSS
-		================================================== -->
-		<!-- Fontawesome Icon font -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-		<!-- Twitter Bootstrap css -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-		<!-- jquery.fancybox  -->
-        <link rel="stylesheet" href="css/jquery.fancybox.css">
-		<!-- animate -->
-        <link rel="stylesheet" href="css/animate.css">
-		<!-- Main Stylesheet -->
-        <link rel="stylesheet" href="css/main.css">
-		<!-- media-queries -->
-        <link rel="stylesheet" href="css/media-queries.css">
-
-		<!-- Modernizer Script for old Browsers -->
-        <script src="js/modernizr-2.6.2.min.js"></script>
-
-    </head>
-	
-    <body id="body">
-	
-		<!-- preloader -->
-		<div id="preloader">
-			<img src="img/preloader.gif" alt="Preloader">
-		</div>
-		<!-- end preloader -->
-
-        <!-- 
-        Fixed Navigation
-        ==================================== -->
-        <header id="navigation" class="navbar-fixed-top navbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <!-- responsive nav button -->
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <i class="fa fa-bars fa-2x"></i>
-                    </button>
-					<!-- /responsive nav button -->
-					
-					<!-- logo -->
-                    <a class="navbar-brand" href="#body">
-						<h1 id="logo">
-							<img src="img/logo.png" alt="BotzAku">
-						</h1>
-					</a>
-					<!-- /logo -->
-                </div>
-
-				<!-- main nav -->
-                <nav class="collapse navbar-collapse navbar-right" role="navigation">
-                    <ul id="nav" class="nav navbar-nav">
-                        <li class="current"><a href="#body">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#works">Work</a></li>
-                        <li><a href="#team">Team</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
-				<!-- /main nav -->
-				
-            </div>
-        </header>
-        <!--
-        End Fixed Navigation
-        ==================================== -->
-		
-		
-		
-        <!--
-        Home Slider
-        ==================================== -->
-		
-		<section id="slider">
-			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			
-				<!-- Indicators bullet -->
-				<ol class="carousel-indicators">
-					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-				</ol>
-				<!-- End Indicators bullet -->				
-				
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
-					
-					<!-- single slide -->
-					<div class="item active" style="background-image: url(img/banner.jpg);">
-						<div class="carousel-caption">
-							<h2 data-wow-duration="700ms" data-wow-delay="500ms" class="wow bounceInDown animated">Let's<span> BotzAku</span>!</h2>
-							<h3 data-wow-duration="1000ms" class="wow slideInLeft animated"><span class="color">/innovation</span> bot operate</h3>
-							<p data-wow-duration="1000ms" class="wow slideInRight animated">We are a team of amateur</p>
-							
-							<ul class="social-links text-center">
-								<li><a href="https://x.com/iky_ynd"><i class="fa fa-twitter fa-lg"></i></a></li>
-								<li><a href="https://github.com/BotzIky"><i class="fa fa-github fa-lg"></i></a></li>
-								<li><a href="https://instagram.com/iikyynd_04"><i class="fa fa-instagram fa-lg"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- end single slide -->
-					
-					<!-- single slide -->
-					<div class="item" style="background-image: url(img/banner.jpg);">
-						<div class="carousel-caption">
-							<h2 data-wow-duration="500ms" data-wow-delay="500ms" class="wow bounceInDown animated">Let's<span> BotzAku</span>!</h2>
-							<h3 data-wow-duration="500ms" class="wow slideInLeft animated"><span class="color">/innovation</span> bot operate</h3>
-							<p data-wow-duration="500ms" class="wow slideInRight animated">We are a team of amateur</p>
-							
-							<ul class="social-links text-center">
-								<li><a href="https://x.com/iky_ynd"><i class="fa fa-twitter fa-lg"></i></a></li>
-								<li><a href="https://github.com/BotzIky"><i class="fa fa-github fa-lg"></i></a></li>
-								<li><a href="https://instagram.com/iikyynd_04"><i class="fa fa-instagram fa-lg"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- end single slide -->
-					
-				</div>
-				<!-- End Wrapper for slides -->
-				
-			</div>
-		</section>
-		
-        <!--
-        End Home SliderEnd
-        ==================================== -->
-		
-        <!--
-        About
-        ==================================== -->
-		
-		<section id="about" class="about">
-			<div class="container">
-				<div class="row">
-				
-					<div class="sec-title text-center mb50 wow bounceInDown animated" data-wow-duration="500ms">
-						<h2>ABOUT</h2>
-						<div class="devider"><i class="fa fa-heart-o fa-lg"></i></div>
-					</div>
-
-					<!-- service item -->
-					<div class="col-md-4 wow fadeInLeft" data-wow-duration="500ms">
-						<div class="service-item">
-							<div class="service-icon">
-								<i class="fa fa-github fa-2x"></i>
-							</div>
-							
-							<div class="service-desc">
-								<h3>BotzAku</h3>
-								<p>Belum tau isi apa</p>
-							</div>
-						</div>
-					</div>
-					<!-- end service item -->
-						
-				</div>
-			</div>
-		</section>
-		
-        <!--
-        End About
-        ==================================== -->
-        	
-<!--
-Our Works
-==================================== -->
-		
-<section id="works" class="works clearfix">
-    <div class="container">
-        <div class="row">
-        
-            <div class="sec-title text-center">
-                <h2>Works</h2>
-                <div class="devider"><i class="fa fa-heart-o fa-lg"></i></div>
-            </div>
-            
-            <div class="sec-sub-title text-center">
-                <p>Entahlah hanya tuhan yang tau</p>
-            </div>
-            
-            <div class="work-filter wow fadeInRight animated" data-wow-duration="500ms">
-                <ul class="text-center">
-                    <li><a href="javascript:;" data-filter="all" class="active filter">All</a></li>
-                    <li><a href="javascript:;" data-filter=".website" class="filter">Website</a></li>
-                    <li><a href="javascript:;" data-filter=".bot" class="filter">Bot</a></li>
-                </ul>
-            </div>
-            
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageButton = document.querySelector('.language-selector > button');
+            const languageDropdown = document.querySelector('.language-dropdown');
+            languageButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                languageDropdown.style.display = languageDropdown.style.display === 'block' ? 'none' : 'block';
+            });
+            const languageButtons = document.querySelectorAll('.language-dropdown button');
+            languageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    switchLanguage(button.dataset.language);
+                    languageDropdown.style.display = 'none';
+                });
+            });
+            document.addEventListener('click', (event) => {
+                if (!languageDropdown.contains(event.target) && !languageButton.contains(event.target)) {
+                    languageDropdown.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</head>
+<body onload="switchLanguage('id')">
+    <div class="language-selector">
+        <button>Language</button>
+        <div class="language-dropdown">
+            <button data-language="id">Indonesia</button>
+            <button data-language="en">English</button>
         </div>
     </div>
     
-    <div class="project-wrapper">
-    
-        <figure class="mix work-item website">
-            <figcaption class="overlay">
-                <h4><a href="https://iky.botzaku.eu.org" target="_blank">Website BotzAku</a></h4>
-                <p>Ini adalah website untuk domain BotzAku atau projek website awal.</p>
-            </figcaption>
-        </figure>
+    <div data-lang="id">
+    	<h1>Hello Botzaa</h1>
+        <h3></h3>   
+        <div id="paragraph1">
+        	<h4></h4>
+            <p>
+                 Maaf Botzaa web sedang maintenance ^_^
+                <img src="https://telegra.ph/file/139568e083c0f1c856668.jpg" alt="BotzAku 1">
+                <button class="toggle-code" onclick="toggleCodeBox('paragraph1')"disabled>Toggle Code</button>
+            </p>
+               <div class="code-box">
+                <button onclick="copyCode(this)">Copy</button>
+                <pre><code>
+Kosong
+                </code></pre>
+            </div> 
+        </div>
         
-        <figure class="mix work-item website">
-            <figcaption class="overlay">
-                <h4><a href="https://riskynd.eu.org" target="_blank">Website Biografi</a></h4>
-                <p>Ini adalah projek website untuk biografi owner.</p>
-            </figcaption>
-        </figure>
-        
-        <figure class="mix work-item bot">
-            <figcaption class="overlay">
-                <h4><a href="https://t.me/ValRisk_Robot" target="_blank">Bot Telegram 1</a></h4>
-                <p>Ini adalah projek bot telegram untuk downloader & other.</p>
-            </figcaption>
-        </figure>
-        
-        <figure class="mix work-item bot">
-            <figcaption class="overlay">
-                <h4><a href="https://t.me/FrndMtch_Bot" target="_blank">Bot Telegram 2</a></h4>
-                <p>Ini adalah projek bog telegram untuk mencari teman/chat anonymous.</p>
-            </figcaption>
-        </figure>
+        </div>
     
-        <figure class="mix work-item bot">
-            <figcaption class="overlay">
-                <h4><a href="https://wa.me/6281536788026" target="_blank">WhatsApp Bot</a></h4>
-                <p>Ini adalah projek gabungan bot telegram 1 & 2 yang di implementasikan di bot WhatsApp.</p>
-            </figcaption>
-        </figure>
+    <div data-lang="en" style="display:none;">
+        <h1>Hello Botzaa</h1>
+        <h3></h3>    
+        <div id="paragraph1-en">
+        	<h4></h4>
+            <p>
+                Sorry Botzaa website is currently under maintenance ^_^
+                <img src="https://telegra.ph/file/139568e083c0f1c856668.jpg" alt="BotzAku 1">
+                <button class="toggle-code" onclick="toggleCodeBox('paragraph1-en')"disabled>Toggle Code</button>
+            </p>
+            <div class="code-box">
+                <button onclick="copyCode(this)">Copy</button>
+                <pre><code>
+Empety
+                </code></pre>
+            </div>
+        </div> 
+        
+        </div>
     
-    </div>
-</section>
-		
-<!--
-End Our Works
-==================================== -->
-
-        <!--
-        Our Team
-        ==================================== -->		
-		
-		<section id="team" class="team">
-			<div class="container">
-				<div class="row">
-		
-					<div class="sec-title text-center wow fadeInUp animated" data-wow-duration="700ms">
-						<h2>Our Team</h2>
-						<div class="devider"><i class="fa fa-heart-o fa-lg"></i></div>
-					</div>
-					
-					<div class="sec-sub-title text-center wow fadeInRight animated" data-wow-duration="500ms">
-						<p>Belum tau isi apa</p>
-					</div>
-
-					<!-- single member -->
-					<figure class="team-member col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms">
-						<h4>Riski Yanda</h4>
-						<span>Owner</span>
-					</figure>
-					<!-- end single member -->
-					
-				</div>
-			</div>
-		</section>
-		
-        <!--
-        End Our Team
-        ==================================== -->
-		
-		<!--
-        Some fun facts
-        ==================================== -->		
-		
-		<section id="facts" class="facts">
-			<div class="parallax-overlay">
-				<div class="container">
-					<div class="row number-counters">
-						
-						<div class="sec-title text-center mb50 wow rubberBand animated" data-wow-duration="1000ms">
-							<h2>Some Fun Facts</h2>
-							<div class="devider"><i class="fa fa-heart-o fa-lg"></i></div>
-						</div>
-						
-						<!-- first count item -->
-						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms">
-							<div class="counters-item">
-								<i class="fa fa-clock-o fa-3x"></i>
-								<strong data-to="8760">0</strong>
-								<!-- Set Your Number here. i,e. data-to="56" -->
-								<p>Hours of Work</p>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
-							<div class="counters-item">
-								<i class="fa fa-rocket fa-3x"></i>
-								<strong data-to="05">0</strong>
-								<!-- Set Your Number here. i,e. data-to="56" -->
-								<p> Projects </p>
-							</div>
-						</div>
-						<!-- end first count item -->
-				
-					</div>
-				</div>
-			</div>
-		</section>
-		
-        <!--
-        End Some fun facts
-        ==================================== -->	
-		
-		<!--
-        Contact Us
-        ==================================== -->		
-		
-		<section id="contact" class="contact">
-			<div class="container">
-				<div class="row mb50">
-					
-					<!-- contact address -->
-					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 wow fadeInLeft animated" data-wow-duration="500ms">
-						<div class="contact-address">
-							<h3>Location</h3>
-							<p>Meriah jaya, Timang Gajah, Bener Meriah</p>
-							<p>Aceh, Indonesia.</p>
-							<p>24553</p>
-						</div>
-					</div>
-					<!-- end contact address -->
-					
-					<!-- footer social links -->
-					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="600ms">
-						<ul class="footer-social">
-							<li><a href="https://x.com/iky_ynd"><i class="fa fa-twitter fa-lg"></i></a></li>
-					    	<li><a href="https://github.com/BotzIky"><i class="fa fa-github fa-lg"></i></a></li>
-							<li><a href="https://instagram.com/iikyynd_04"><i class="fa fa-instagram fa-lg"></i></a></li>
-						</ul>
-					</div>
-					<!-- end footer social links -->
-					
-				</div>
-			</div>
-			
-		</section>
-		
-        <!--
-        End Contact Us
-        ==================================== -->
-			
-		<footer id="footer" class="footer">
-			<div class="container">
-				<div class="row">
-				
-					<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="900ms">
-						<div class="footer-single">
-							<h6>Support</h6>
-							<ul>
-								<li><a href="https://t.me/iky_kiezie">Contact Us</a></li>
-								<li><a href="https://t.me/Botz_Aku">Group</a></li>
-							</ul>
-						</div>
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<p class="copyright text-center">
-							Copyright © 2024 <a href="http://iky.botzaku.eu.org/">BotzAku</a>. All rights reserved. Designed & developed by <a href="http://t.me/iky_kiezie/">Riski Yanda</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</footer>
-		
-		<a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
-
-		<!-- Essential jQuery Plugins
-		================================================== -->
-		<!-- Main jQuery -->
-        <script src="js/jquery-1.11.1.min.js"></script>
-		<!-- Single Page Nav -->
-        <script src="js/jquery.singlePageNav.min.js"></script>
-		<!-- Twitter Bootstrap -->
-        <script src="js/bootstrap.min.js"></script>
-		<!-- jquery.fancybox.pack -->
-        <script src="js/jquery.fancybox.pack.js"></script>
-		<!-- jquery.mixitup.min -->
-        <script src="js/jquery.mixitup.min.js"></script>
-		<!-- jquery.parallax -->
-        <script src="js/jquery.parallax-1.1.3.js"></script>
-		<!-- jquery.countTo -->
-        <script src="js/jquery-countTo.js"></script>
-		<!-- jquery.appear -->
-        <script src="js/jquery.appear.js"></script>
-		<!-- Contact form validation -->
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-		<!-- jquery easing -->
-        <script src="js/jquery.easing.min.js"></script>
-		<!-- jquery easing -->
-        <script src="js/wow.min.js"></script>
-		<script>
-			var wow = new WOW ({
-				boxClass:     'wow',      // animated element css class (default is wow)
-				animateClass: 'animated', // animation css class (default is animated)
-				offset:       120,          // distance to the element when triggering the animation (default is 0)
-				mobile:       false,       // trigger animations on mobile devices (default is true)
-				live:         true        // act on asynchronously loaded content (default is true)
-			  }
-			);
-			wow.init();
-		</script> 
-		<!-- Custom Functions -->
-        <script src="js/custom.js"></script>
-    </body>
+</body>
 </html>
