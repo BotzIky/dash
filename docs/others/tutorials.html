@@ -11,6 +11,7 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             padding: 20px;
+            font-size: 1rem;
         }
         .code-box {
             background-color: #1e1e1e;
@@ -92,6 +93,16 @@
         h3 {
         margin-top: 0; 
         }
+        @media (max-width: 768px) {
+            body {
+                font-size: 0.875rem;
+            }
+         }
+        @media (min-width: 769px) {
+            body {
+                font-size: 1rem;
+            }
+         }
     </style>
     <script>
         function switchLanguage(language) {
@@ -159,8 +170,7 @@
         <div id="paragraph1">
         	<h4>Langkah 1</h4>
             <p>
-                Pertama kamu harus masuk ke akun GitHub terlebih dahulu, begini tampilan awalnya:
-                <img src="https://telegra.ph/file/4ec0380001743519944d9.jpg" alt="Gambar 1">
+                Pertama kamu harus masuk ke akun GitHub terlebih dahulu, lalu masuk melalui tautan berikut: https://github.com/settings/tokens/new
                 <button class="toggle-code" onclick="toggleCodeBox('paragraph1')"disabled>Toggle Code</button>
             </p>
                <div class="code-box">
@@ -173,10 +183,25 @@ Kosong
         <div id="paragraph2">
         	<h4>Langkah 2</h4>
             <p>
-                Kedua klik pada pojok kanan atas yang terdapat gambar profile, lalu cari "Setting" dan klik.
+                Selanjutnya masukkan nama token dan masa aktif token (bebas)
                 <img src="https://telegra.ph/file/d34991ceb6fea3894083a.jpg" alt="Gambar 2">
                 <img src="https://telegra.ph/file/cb267d9f35cc81ede1850.jpg" alt="Gambar 3">
                 <button class="toggle-code" onclick="toggleCodeBox('paragraph2')"disabled>Toggle Code</button>
+            </p>
+               <div class="code-box">
+                <button onclick="copyCode(this)">Copy</button>
+                <pre><code>
+Kosong
+                </code></pre>
+            </div> 
+        </div>
+        <div id="paragraph3">
+        	<h4>Langkah 3</h4>
+            <p>
+                Lalu cari "Developer settings" 
+                <img src="https://telegra.ph/file/d34991ceb6fea3894083a.jpg" alt="Gambar 2">
+                <img src="https://telegra.ph/file/cb267d9f35cc81ede1850.jpg" alt="Gambar 3">
+                <button class="toggle-code" onclick="toggleCodeBox('paragraph3')"disabled>Toggle Code</button>
             </p>
                <div class="code-box">
                 <button onclick="copyCode(this)">Copy</button>
