@@ -82,16 +82,16 @@
             display: block;
         }
         h4 {
-        margin-bottom: 0; 
+            margin-bottom: 0; 
         }
         p {
-        margin-top: 0; 
+            margin-top: 0; 
         }
         h1 {
-        margin-bottom: 0; 
+            margin-bottom: 0; 
         }
         h3 {
-        margin-top: 0; 
+            margin-top: 0; 
         }
         a {
             color: #ff9800; 
@@ -122,6 +122,7 @@
                 }
             });
         }
+
         function toggleCodeBox(paragraphId) {
             const codeBox = document.querySelector(`#${paragraphId} .code-box`);
             if (codeBox.style.display === 'none') {
@@ -130,6 +131,7 @@
                 codeBox.style.display = 'none';
             }
         }
+
         function copyCode(button) {
             const code = button.closest('.code-box').querySelector('code').innerText;
             navigator.clipboard.writeText(code).then(() => {
@@ -170,10 +172,15 @@
             <button data-language="en">English</button>
         </div>
     </div>
-    
+
+<!-- LANGUAGE -->
     <div data-lang="id">
+<!-- HEADER -->
     	<h1>BotzAku Notifikasi</h1>
         <h3>Halo Botzaa</h3>   
+<!-- END HEADER -->
+        
+<!-- PARAGRAF -->
         <div id="paragraph1">
         	<h4>:(</h4>
             <p>
@@ -188,12 +195,35 @@ Kosong
                 </code></pre>
             </div> 
         </div>
-        
+        <div id="paragraph2">
+        	<h4>Lainnya</h4>
+            <p>
+                 <a href="https://t.me/Git_Keybot">Telegram Bot GitHub</a><br>
+                 <a href="https://t.me/ValRisk_Robot">Telegram Bot Downloader and Other</a><br>
+                 <a href="https://t.me/FrndMtch_Bot">Telegram Mencari Teman</a><br>
+                 <a href="https://wa.me/6281536788026">WhatsApp Bot</a>
+                <img src="https://telegra.ph/file/cd8e108ff251299f101ea.jpg" alt="BotzAku 2">
+                <button class="toggle-code" onclick="toggleCodeBox('paragraph2')"disabled>Toggle Code</button>
+            </p>
+               <div class="code-box">
+                <button onclick="copyCode(this)">Copy</button>
+                <pre><code>
+Kosong
+                </code></pre>
+            </div> 
         </div>
-    
+<!-- END PARAGRAF-->    
+    </div>
+ <!-- END LANGUAGE -->
+ 
+<!-- LANGUAGE -->
     <div data-lang="en" style="display:none;">
+<!-- HEADER -->
         <h1>BotzAku Notifications</h1>
-        <h3>Hello Botzaa</h3>    
+        <h3>Hello Botzaa</h3> 
+<!-- END HEADER -->
+
+<!-- PARAGRAF -->  
         <div id="paragraph1-en">
         	<h4>:(</h4>
             <p>
@@ -208,8 +238,25 @@ Empety
                 </code></pre>
             </div>
         </div> 
-        
+        <div id="paragraph2-en">
+        	<h4>Others</h4>
+            <p>
+                 <a href="https://t.me/Git_Keybot">Telegram Bot GitHub</a><br>
+                 <a href="https://t.me/ValRisk_Robot">Telegram Bot Downloader and Other</a><br>
+                 <a href="https://t.me/FrndMtch_Bot">Telegram Looking for friends</a><br>
+                 <a href="https://wa.me/6281536788026">WhatsApp Bot</a>
+                <img src="https://telegra.ph/file/cd8e108ff251299f101ea.jpg" alt="BotzAku 2">
+                <button class="toggle-code" onclick="toggleCodeBox('paragraph2-en')"disabled>Toggle Code</button>
+            </p>
+            <div class="code-box">
+                <button onclick="copyCode(this)">Copy</button>
+                <pre><code>
+Empety
+                </code></pre>
+            </div>
         </div>
-    
+<!-- END PARAGRAF -->
+    </div>
+<!-- END LANGUAGE -->
 </body>
 </html>
