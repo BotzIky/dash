@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About @Git_Keybot</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 1rem;
+        }
+        .code-box {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            color: #dcdcdc;
+            position: relative;
+            display: none; 
+        }
+        .code-box::before {
+            content: 'Code:';
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ff9800;
+        }
+        .code-box button, .toggle-code, .language-selector button {
+            background-color: #333;
+            color: #ff9800;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .code-box button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .toggle-code[disabled] {
+           pointer-events: none;
+           opacity: 0;
+        }  
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0; 
+        }
+        .language-selector {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            min-width: 100%;
+        }
+        .language-dropdown button {
+            color: #ff9800;
+            padding: 12px 16px; 
+            text-decoration: none;
+            display: block;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+        .language-selector button {
+            background-color: #333;
+            color: #ff9800;
+            border: none;
+            padding: 0.5em 1em;  
+            font-size: 1em; 
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .language-selector:hover .language-dropdown {
+            display: block;
+        }
+        h4 {
+        margin-bottom: 0; 
+        }
+        p {
+        margin-top: 0; 
+        }
+        h1 {
+        margin-bottom: 0; 
+        }
+        h3 {
+        margin-top: 0; 
+        }
+        a {
+            color: #ff9800; 
+            text-decoration: none; 
+        }
+        a:hover {
+            color: #ff5722; 
+        }
+        @media (max-width: 768px) {
+            body {
+                font-size: 0.875rem;
+            }
+         }
+        @media (min-width: 769px) {
+            body {
+                font-size: 1rem;
+            }
+         }
+        @media (max-width: 768px) {
+            .language-selector button {
+                padding: 0.5em 1em;   
+                 font-size: 1em;
+             }
+          }
+         @media (min-width: 769px) {
+             .language-selector button {
+                 padding: 1em 2em;
+                 font-size: 1.5em;
+               }
+             }
+         @media (max-width: 768px) {
+            .toggle-code {
+               padding: 0.5em 1em;
+               font-size: 1em;
+             }
+            .code-box {
+              padding: 10px;
+             }
+            .code-box button {
+              padding: 0.5em 1em;
+              font-size: 1em;
+             }
+             .code-box code {
+               font-size: 0.875rem; 
+             }
+           }
+         @media (min-width: 769px) {
+            .toggle-code {
+              padding: 1em 2em;
+              font-size: 1.5em;
+            }
+            .code-box {
+              padding: 15px;
+            }
+            .code-box button {
+              padding: 1em 2em;
+              font-size: 1.5em;
+            }
+            .code-box code {
+              font-size: 1.5rem; 
+            }
+         }
+    </style>
+    <script>
+        function switchLanguage(language) {
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(element => {
+                if (element.dataset.lang === language) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+        }
+        function toggleCodeBox(paragraphId) {
+            const codeBox = document.querySelector(`#${paragraphId} .code-box`);
+            if (codeBox.style.display === 'none') {
+                codeBox.style.display = 'block';
+            } else {
+                codeBox.style.display = 'none';
+            }
+        }
+        function copyCode(button) {
+            const code = button.closest('.code-box').querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => {
+                    button.innerText = 'Copy';
+                }, 2000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageButton = document.querySelector('.language-selector > button');
+            const languageDropdown = document.querySelector('.language-dropdown');
+            languageButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                languageDropdown.style.display = languageDropdown.style.display === 'block' ? 'none' : 'block';
+            });
+            const languageButtons = document.querySelectorAll('.language-dropdown button');
+            languageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    switchLanguage(button.dataset.language);
+                    languageDropdown.style.display = 'none';
+                });
+            });
+            document.addEventListener('click', (event) => {
+                if (!languageDropdown.contains(event.target) && !languageButton.contains(event.target)) {
+                    languageDropdown.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</head>
+<body onload="switchLanguage('id')">
+    <div class="language-selector">
+        <button>Language</button>
+        <div class="language-dropdown">
+            <button data-language="id">Indonesia</button>
+            <button data-language="en">English</button>
+        </div>
+    </div>
+    
+    <div data-lang="id">
+    	<h1>HELLO BOTZAA</h1>
+        <h3>Maaf website sedang maintenance</h3>   
+        <div id="paragraph1">
+        	<h4>:(</h4>
+            <p>
+                Sementara tunggu info lebih lanjut ya: <a href='https://t.me/Botz_Aku'>Klik Disini</a>
+                <img src="https://telegra.ph/file/aa6b5d1bfbd54b1813a25.jpg" alt="BotzAku">
+                <button class="toggle-code" onclick="toggleCodeBox('paragraph1')"disabled>Toggle Code</button>
+            </p>
+               <div class="code-box">
+                <button onclick="copyCode(this)">Copy</button>
+                <pre><code>
+Kosong
+                </code></pre>
+            </div> 
+        </div>
+      </div>
+    
+    <div data-lang="en" style="display:none;">
+        <h1>HELLO BOTZAA</h1>
+        <h3>Sorry, the website is currently under maintenance</h3>    
+        <div id="paragraph1-en">
+        	<h4>:(</h4>
+            <p>
+                While waiting for further information: <a href='https://github.com/settings/tokens/new'>Click Here</a>
+                <img src="https://telegra.ph/file/aa6b5d1bfbd54b1813a25.jpg" alt="BotzAku">
+                <button class="toggle-code" onclick="toggleCodeBox('paragraph1-en')"disabled>Toggle Code</button>
+            </p>
+            <div class="code-box">
+                <button onclick="copyCode(this)">Copy</button>
+                <pre><code>
+Empety
+                </code></pre>
+            </div>
+         </div> 
+       </div>
+    
+</body>
+</html>
