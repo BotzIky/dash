@@ -53,7 +53,7 @@
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 20px 0;
+            margin: 20px 0; 
         }
         .language-selector {
             margin-bottom: 20px;
@@ -70,16 +70,13 @@
         }
         .language-dropdown button {
             color: #ff9800;
-            padding: 12px 16px;
+            padding: 12px 16px; 
             text-decoration: none;
             display: block;
             background: none;
             border: none;
             width: 100%;
             text-align: left;
-        }
-        .language-selector:hover .language-dropdown {
-            display: block;
         }
         .language-selector button {
             background-color: #333;
@@ -90,17 +87,20 @@
             cursor: pointer;
             border-radius: 3px;
         }
+        .language-selector:hover .language-dropdown {
+            display: block;
+        }
         h4 {
-            margin-bottom: 0; 
+        margin-bottom: 0; 
         }
         p {
-            margin-top: 0; 
+        margin-top: 0; 
         }
         h1 {
-            margin-bottom: 0; 
+        margin-bottom: 0; 
         }
         h3 {
-            margin-top: 0; 
+        margin-top: 0; 
         }
         a {
             color: #ff9800; 
@@ -119,7 +119,7 @@
                 font-size: 1rem;
             }
          }
-         @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .language-selector button {
                 padding: 0.5em 1em;   
                  font-size: 1em;
@@ -128,9 +128,9 @@
          @media (min-width: 769px) {
              .language-selector button {
                  padding: 1em 2em;
-                font-size: 1.5em;
-              }
-            }
+                 font-size: 1.5em;
+               }
+             }
          @media (max-width: 768px) {
             .toggle-code {
                padding: 0.5em 1em;
@@ -147,7 +147,7 @@
                font-size: 0.875rem; 
              }
            }
-        @media (min-width: 769px) {
+         @media (min-width: 769px) {
             .toggle-code {
               padding: 1em 2em;
               font-size: 1.5em;
@@ -175,7 +175,6 @@
                 }
             });
         }
-
         function toggleCodeBox(paragraphId) {
             const codeBox = document.querySelector(`#${paragraphId} .code-box`);
             if (codeBox.style.display === 'none') {
@@ -184,7 +183,6 @@
                 codeBox.style.display = 'none';
             }
         }
-
         function copyCode(button) {
             const code = button.closest('.code-box').querySelector('code').innerText;
             navigator.clipboard.writeText(code).then(() => {
@@ -225,20 +223,15 @@
             <button data-language="en">English</button>
         </div>
     </div>
-
-<!-- LANGUAGE -->
+    
     <div data-lang="id">
-<!-- HEADER -->
-    	<h1>BotzAku Notifikasi</h1>
-        <h3>Halo Botzaa</h3>   
-<!-- END HEADER -->
-        
-<!-- PARAGRAF -->
+    	<h1>HELLO BOTZAA</h1>
+        <h3>Maaf website sedang maintenance</h3>   
         <div id="paragraph1">
         	<h4>:(</h4>
             <p>
-                 Maaf Botzaa web sedang maintenance!
-                <img src="https://telegra.ph/file/139568e083c0f1c856668.jpg" alt="BotzAku 1">
+                Sementara tunggu info lebih lanjut ya: <a href='https://t.me/Botz_Aku'>Klik Disini</a>
+                <img src="https://telegra.ph/file/aa6b5d1bfbd54b1813a25.jpg" alt="BotzAku">
                 <button class="toggle-code" onclick="toggleCodeBox('paragraph1')"disabled>Toggle Code</button>
             </p>
                <div class="code-box">
@@ -248,40 +241,16 @@ Kosong
                 </code></pre>
             </div> 
         </div>
-        <div id="paragraph2">
-        	<h4>Lainnya</h4>
-            <p>
-                 <a href="https://t.me/Git_Keybot">Telegram Bot GitHub</a><br>
-                 <a href="https://t.me/ValRisk_Robot">Telegram Bot Downloader and Other</a><br>
-                 <a href="https://t.me/FrndMtch_Bot">Telegram Mencari Teman</a><br>
-                 <a href="https://wa.me/6281536788026">WhatsApp Bot</a>
-                <img src="https://telegra.ph/file/cd8e108ff251299f101ea.jpg" alt="BotzAku 2">
-                <button class="toggle-code" onclick="toggleCodeBox('paragraph2')"disabled>Toggle Code</button>
-            </p>
-               <div class="code-box">
-                <button onclick="copyCode(this)">Copy</button>
-                <pre><code>
-Kosong
-                </code></pre>
-            </div> 
-        </div>
-<!-- END PARAGRAF-->    
-    </div>
- <!-- END LANGUAGE -->
- 
-<!-- LANGUAGE -->
+      </div>
+    
     <div data-lang="en" style="display:none;">
-<!-- HEADER -->
-        <h1>BotzAku Notifications</h1>
-        <h3>Hello Botzaa</h3> 
-<!-- END HEADER -->
-
-<!-- PARAGRAF -->  
+        <h1>HELLO BOTZAA</h1>
+        <h3>Sorry, the website is currently under maintenance</h3>    
         <div id="paragraph1-en">
         	<h4>:(</h4>
             <p>
-                Sorry Botzaa website is currently under maintenance!
-                <img src="https://telegra.ph/file/139568e083c0f1c856668.jpg" alt="BotzAku 1">
+                While waiting for further information: <a href='https://github.com/settings/tokens/new'>Click Here</a>
+                <img src="https://telegra.ph/file/aa6b5d1bfbd54b1813a25.jpg" alt="BotzAku">
                 <button class="toggle-code" onclick="toggleCodeBox('paragraph1-en')"disabled>Toggle Code</button>
             </p>
             <div class="code-box">
@@ -290,26 +259,8 @@ Kosong
 Empety
                 </code></pre>
             </div>
-        </div> 
-        <div id="paragraph2-en">
-        	<h4>Others</h4>
-            <p>
-                 <a href="https://t.me/Git_Keybot">Telegram Bot GitHub</a><br>
-                 <a href="https://t.me/ValRisk_Robot">Telegram Bot Downloader and Other</a><br>
-                 <a href="https://t.me/FrndMtch_Bot">Telegram Looking for friends</a><br>
-                 <a href="https://wa.me/6281536788026">WhatsApp Bot</a>
-                <img src="https://telegra.ph/file/cd8e108ff251299f101ea.jpg" alt="BotzAku 2">
-                <button class="toggle-code" onclick="toggleCodeBox('paragraph2-en')"disabled>Toggle Code</button>
-            </p>
-            <div class="code-box">
-                <button onclick="copyCode(this)">Copy</button>
-                <pre><code>
-Empety
-                </code></pre>
-            </div>
-        </div>
-<!-- END PARAGRAF -->
-    </div>
-<!-- END LANGUAGE -->
+         </div> 
+       </div>
+    
 </body>
 </html>
